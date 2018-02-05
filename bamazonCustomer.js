@@ -11,6 +11,7 @@ var connection = mysql.createConnection({
 	database: "bamazon"
 });
 
+//prompt screen
 connection.connect(function(err){
 	if (err) throw err;
 	console.log("-------------------------".inverse);
@@ -21,6 +22,7 @@ connection.connect(function(err){
 	buyProduct();
 });
 
+//show products in database
 function showProducts() {
 	connection.query("SELECT * FROM products", function (err, res){
 		for (var i = 0; i <res.length; i++) {
@@ -62,7 +64,7 @@ function buyProduct() {
           }
         },
       ])
-
+//what happens when the product is chosen
       .then(function(chosenProduct){
         connection.query("SELECT * FROM products WHERE product_name=?", chosenProduct.choice, function(err, results){
           for (var i = 0; i < results.length; i++) {
